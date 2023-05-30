@@ -3,15 +3,8 @@
 #include <string.h>
 
 #include "simulation.h"
-#include "../events/event.h"
-#include "../event_queues/event_queue.h"
 
-struct queue_list {
-    event_queue *queue ;
-    struct queue_list *next ;
-};
-
-inline void destroy_simulation(struct simulation *sim) {
+void destroy_simulation(struct simulation *sim) {
 
     struct queue_list *first = sim->queues ;
 

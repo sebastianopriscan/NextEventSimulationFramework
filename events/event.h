@@ -5,10 +5,10 @@
 typedef struct event {
 
         double time ;
-        void (*change_sim_state)(simulation *sim) ;
-        void (*schedule_next_event)(simulation *sim) ;
+        void (*change_sim_state)(struct simulation *sim) ;
+        void (*schedule_next_event)(struct simulation *sim) ;
 } event ;
 
-event *createEvent(double time, void (*change_state_func)(simulation *sim), void (*schedule_func)(simulation *sim)) ;
+event *createEvent(double time, void (*change_state_func)(struct simulation *sim), void (*schedule_func)(struct simulation *sim)) ;
 
-void consumeEvent(struct event *ev, simulation *sim) ;
+void consumeEvent(struct event *ev, struct simulation *sim) ;

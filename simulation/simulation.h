@@ -1,5 +1,12 @@
 #pragma once
 
+#include "../event_queues/event_queue.h"
+
+struct queue_list {
+    struct event_queue *queue ;
+    struct queue_list *next ;
+};
+
 typedef struct simulation {
 
     double clock ;
@@ -12,6 +19,6 @@ typedef struct simulation {
 
 simulation *create_simulation(int state_size, int event_queues, double sim_end, const char *state) ;
 
-inline void destroy_simulation(struct simulation *sim) ;
+void destroy_simulation(struct simulation *sim) ;
 
 void run_simulation(struct simulation *sim) ;

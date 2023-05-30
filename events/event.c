@@ -20,7 +20,7 @@ event *createEvent(double time, void (*change_state_func)(simulation *sim), void
     return retVal ;
 }
 
-void consumeEvent(struct event *ev, simulation *sim) {
+void consumeEvent(struct event *ev, struct simulation *sim) {
 
     if (ev->time <= sim->simEnd) {
         ev->change_sim_state(sim) ;

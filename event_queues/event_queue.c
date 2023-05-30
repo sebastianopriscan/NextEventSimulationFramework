@@ -1,10 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "../events/event.h"
 #include "event_queue.h"
 
-struct event_node *create_node(event *event) {
+struct event_node *create_node(struct event *event) {
 
     struct event_node * node ;
 
@@ -19,11 +18,11 @@ struct event_node *create_node(event *event) {
     return node ;
 }
 
-inline void destroy_node(struct event_node *node) {
+void destroy_node(struct event_node *node) {
     free(node) ;
 }
 
-void *enqueue_event(struct event_queue *queue, event *event) {
+void *enqueue_event(struct event_queue *queue, struct event *event) {
 
     struct event_node *node = queue->firstNode ;
 
@@ -70,7 +69,7 @@ struct event_queue *create_queue() {
     return queue ;
 }
 
-void delete_queue(event_queue * queue) {
+void delete_queue(struct event_queue * queue) {
 
     while (dequeue_event(queue) != NULL) ;
 
