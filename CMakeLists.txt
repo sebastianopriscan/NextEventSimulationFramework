@@ -1,26 +1,34 @@
 cmake_minimum_required(VERSION 3.24)
-project(NextEventSimulationSkeleton C)
+project(NextEventSimulationFramework C)
 
-include(GNUInstallDirs)
+# include(GNUInstallDirs)
 
 set(CMAKE_C_STANDARD 11)
 
-option(INSTALL_GLOBAL "Install library globally" OFF)
+# option(INSTALL_GLOBAL "Install library globally" OFF)
 
-add_library(NextEventSimulationFramework STATIC simulation/simulation.c events/event.c event_queues/event_queue.c)
+add_library(
+  NextEventSimulationFramework
+  STATIC
+  simulation/simulation.c simulation/simulation.h
+  events/event.c events/event.h
+  event_queues/event_queue.c event_queues/event_queue.h
+)
 
-install(TARGETS NextEventSimulationFramework
-    EXPORT NextEventSimulationFrameworkTargets
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-    )
+target_include_directories (NextEventSimulationFramework PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-install(FILES simulation/simulation.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+# install(TARGETS NextEventSimulationFramework
+#     EXPORT NextEventSimulationFrameworkTargets
+#     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+#     INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+#     )
 
-install(EXPORT NextEventSimulationFrameworkTargets
-    FILE NextEventSimulationFrameworkTargets.cmake
-    NAMESPACE NextEventSimulationFramework::
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/NextEventSimulationFramework
-    )
+# install(FILES simulation/simulation.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+# install(EXPORT NextEventSimulationFrameworkTargets
+#     FILE NextEventSimulationFrameworkTargets.cmake
+#     NAMESPACE NextEventSimulationFramework::
+#     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/NextEventSimulationFramework
+#     )
