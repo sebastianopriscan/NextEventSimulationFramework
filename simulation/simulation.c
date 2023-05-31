@@ -28,19 +28,25 @@ void destroy_simulation(struct simulation *sim) {
 
 event *getNextEvent(struct simulation *sim) {
 
-    struct event *chosen = sim->queues->queue->firstNode->payload_event ;
+    struct event *chosen = NULL;
+    int remove_index = -1 ;
+
+    if(sim->queues->queue->firstNode != NULL) {
+        chosen = sim->queues->queue->firstNode->payload_event ;
+        remove_index = 0 ;
+    }
 
     struct queue_list *currentQueue = sim->queues ;
-
-    int remove_index = 0 ;
 
     for(int i = 1 ; i < sim->queue_number; i++) {
 
         currentQueue = currentQueue->next ;
 
+        if(currentQueue->queue->firstNode == NULL) continue ;
+
         struct event *candidate = currentQueue->queue->firstNode->payload_event ;
 
-        if (candidate->time <= chosen->time) {
+        if (chosen == NULL || candidate->time <= chosen->time) {
             chosen = candidate ;
             remove_index = i ;
         }
@@ -112,6 +118,8 @@ struct simulation *create_simulation(int state_size, int event_queues, double si
                 destroy_simulation(sim) ;
                 return  NULL ;
             }
+
+            actual->next = newL ;
 
             actual = newL ;
         }

@@ -6,6 +6,7 @@ include(GNUInstallDirs)
 set(CMAKE_C_STANDARD 11)
 
 option(INSTALL_GLOBAL "Install library globally" OFF)
+option(COMPILE_TESTS "Compile tests" ON)
 
 add_library(NextEventSimulationFramework STATIC simulation/simulation.c events/event.c event_queues/event_queue.c)
 
@@ -24,3 +25,5 @@ install(EXPORT NextEventSimulationFrameworkTargets
     NAMESPACE NextEventSimulationFramework::
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/NextEventSimulationFramework
     )
+
+add_subdirectory(tests)
