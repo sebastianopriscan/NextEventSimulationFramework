@@ -14,7 +14,7 @@ typedef struct event_queue {
     struct event_node *firstNode ;
 } event_queue ;
 
-void *enqueue_event(struct event_queue *queue, struct event *event) ;
+void enqueue_event(struct event_queue *queue, struct event *event) ;
 
 struct event *dequeue_event(struct event_queue *queue) ;
 

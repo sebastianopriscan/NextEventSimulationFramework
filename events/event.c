@@ -23,9 +23,9 @@ event *createEvent(double time, void (*change_state_func)(simulation *sim), void
 void consumeEvent(struct event *ev, struct simulation *sim) {
 
     if (ev->time <= sim->simEnd) {
+        sim->clock = ev->time ;
         ev->change_sim_state(sim) ;
         ev->schedule_next_event(sim) ;
-        sim->clock = ev->time ;
     }
 
     free(ev) ;

@@ -22,7 +22,7 @@ void destroy_node(struct event_node *node) {
     free(node) ;
 }
 
-void *enqueue_event(struct event_queue *queue, struct event *event) {
+void enqueue_event(struct event_queue *queue, struct event *event) {
 
     struct event_node *node = queue->firstNode ;
 
