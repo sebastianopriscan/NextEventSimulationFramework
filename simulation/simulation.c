@@ -101,14 +101,14 @@ struct simulation *create_simulation(int state_size, int event_queues, double si
 
     struct queue_list *actual = list_head;
 
-    for(int i = 0 ; i < state_size ; i++) {
+    for(int i = 0 ; i < event_queues ; i++) {
         if((actual->queue = create_queue()) == NULL) {
             destroy_simulation(sim) ;
 
             return NULL ;
         }
 
-        if (i == state_size-1) {
+        if (i == event_queues-1) {
             actual->next = NULL ;
         } else {
             struct queue_list *newL ;
