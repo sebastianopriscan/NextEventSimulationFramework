@@ -2,6 +2,8 @@
 
 #include "../simulation/simulation.h"
 
+struct simulation ;
+
 typedef struct event {
 
         double time ;
