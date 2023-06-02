@@ -2,7 +2,7 @@
 
 #include "simulation/simulation.h"
 
-void dummyStateModifier(simulation *sim) {
+void dummyStateModifier(simulation *sim, void *metadata) {
     sim->state[0] = 'H' ;
     sim->state[1] = 'e' ;
     sim->state[2] = 'l' ;
@@ -13,11 +13,11 @@ void dummyStateModifier(simulation *sim) {
     printf("Executed event at time %f\n\n", sim->clock) ;
 }
 
-void dummyStateEvolver(simulation *sim) {
+void dummyStateEvolver(simulation *sim, void * metadata) {
     static int modulus = 0 ;
     static float time = 34.0f ;
     time = time +1 ;
-    event *event1 = createEvent(time,dummyStateModifier, dummyStateEvolver) ;
+    event *event1 = createEvent(time,dummyStateModifier, dummyStateEvolver, NULL) ;
 
     struct queue_list *queue = sim->queues ;
 
@@ -36,7 +36,7 @@ int main(void) {
     char state[45] ;
     simulation *simulation1 = create_simulation(3,3,45.0f, state) ;
 
-    event *event1 = createEvent(34.0f,dummyStateModifier, dummyStateEvolver) ;
+    event *event1 = createEvent(34.0f,dummyStateModifier, dummyStateEvolver, NULL) ;
 
     enqueue_event(simulation1->queues->queue, event1) ;
 
