@@ -33,4 +33,5 @@ target_include_directories (NextEventSimulationFramework PUBLIC ${CMAKE_CURRENT_
 #     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/NextEventSimulationFramework
 #     )
 
+enable_testing()
 add_subdirectory(tests)
