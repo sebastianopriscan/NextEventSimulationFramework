@@ -19,6 +19,8 @@ typedef struct simulation {
 
 simulation *create_simulation(int state_size, int event_queues, double sim_end, const char *state) ;
 
+void add_event_to_simulation(simulation *simulation, event *event, int queue_index) ;
+
 void destroy_simulation(struct simulation *sim) ;
 
 void run_simulation(struct simulation *sim) ;

@@ -127,3 +127,15 @@ struct simulation *create_simulation(int state_size, int event_queues, double si
 
     return sim ;
 }
+
+void add_event_to_simulation(simulation *simulation, event *event, int queue_index)
+{
+    struct queue_list *queues = simulation->queues ;
+
+    for (int i = 0; i < queue_index; i++)
+    {
+        queues = queues->next ;
+    }
+
+    enqueue_event(queues->queue, event) ;
+}
