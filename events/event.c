@@ -3,7 +3,8 @@
 
 #include "event.h"
 
-event *createEvent(double time, void (*change_state_func)(simulation *sim), void (*schedule_func)(simulation *sim)) {
+event *createEvent(double time, void (*change_state_func)(simulation *sim, void *metadata),
+                   void (*schedule_func)(simulation *sim, void *metadata), void *metadata) {
 
     struct event *retVal ;
 
@@ -15,7 +16,7 @@ event *createEvent(double time, void (*change_state_func)(simulation *sim), void
     retVal->time = time ;
     retVal->change_sim_state = change_state_func ;
     retVal->schedule_next_event = schedule_func ;
-
+    retVal->metadata = metadata ;
 
     return retVal ;
 }
@@ -24,8 +25,11 @@ void consumeEvent(struct event *ev, struct simulation *sim) {
 
     if (ev->time <= sim->simEnd) {
         sim->clock = ev->time ;
-        ev->change_sim_state(sim) ;
-        ev->schedule_next_event(sim) ;
+        if(ev->change_sim_state != NULL)
+            ev->change_sim_state(sim, ev->metadata) ;
+
+        if(ev->schedule_next_event != NULL)
+            ev->schedule_next_event(sim, ev->metadata) ;
     }
 
     free(ev) ;
