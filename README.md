@@ -50,3 +50,6 @@
     #include <events/event.h>
     #include <event_queues/event_queue.h>
     ```
+## Credits
+
+- `libs/RandomVariates` from Discrete Event Simulation Leemis, Park
