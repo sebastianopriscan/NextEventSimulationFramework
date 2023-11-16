@@ -1,11 +1,7 @@
 cmake_minimum_required(VERSION 3.24)
 project(NextEventSimulationFramework C)
 
-# include(GNUInstallDirs)
-
 set(CMAKE_C_STANDARD 11)
-
-# option(INSTALL_GLOBAL "Install library globally" OFF)
 
 add_library(
   NextEventSimulationFramework
@@ -17,21 +13,9 @@ add_library(
 
 target_include_directories (NextEventSimulationFramework PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-# install(TARGETS NextEventSimulationFramework
-#     EXPORT NextEventSimulationFrameworkTargets
-#     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-#     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-#     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-#     INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-#     )
+add_subdirectory(libs/RandomVariates)
 
-# install(FILES simulation/simulation.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-
-# install(EXPORT NextEventSimulationFrameworkTargets
-#     FILE NextEventSimulationFrameworkTargets.cmake
-#     NAMESPACE NextEventSimulationFramework::
-#     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/NextEventSimulationFramework
-#     )
-
-enable_testing()
-add_subdirectory(tests)
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  enable_testing()
+  add_subdirectory(tests)
+endif()
