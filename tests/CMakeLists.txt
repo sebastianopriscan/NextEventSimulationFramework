@@ -16,3 +16,8 @@ add_executable(TestSimMetadata test_simulation_metadata.c)
 target_link_libraries(TestSimMetadata NextEventSimulationFramework)
 add_test(NAME TestSimMetadata
         COMMAND TestSimMetadata)
+
+add_executable(TestSimMM1 test_simulation_mm1.c)
+target_link_libraries(TestSimMM1 NextEventSimulationFramework RandomVariates m)
+add_test(NAME TestSimMM1
+        COMMAND TestSimMM1)
