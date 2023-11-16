@@ -67,6 +67,8 @@ event *dequeue_event(struct event_queue *queue) {
 
         if(queue->firstNode != NULL)
             queue->firstNode->prev_node = NULL ;
+        else
+            queue->lastNode = NULL ;
 
         destroy_node(first) ;
 
