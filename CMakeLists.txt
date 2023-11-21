@@ -16,6 +16,7 @@ target_compile_definitions(NextEventSimulationFramework PRIVATE COMPILATION_H)
 target_include_directories (NextEventSimulationFramework PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_subdirectory(libs/RandomVariates)
+add_subdirectory(libs/GenericQueue)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   enable_testing()
