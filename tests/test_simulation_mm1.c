@@ -67,7 +67,7 @@ void server_activate(struct simulation *sim, void *metadata)
 
     double next = sim->clock + service_time;
 
-    event* event = createEvent(next, server_activate, NULL, NULL);
+    struct event* event = createEvent(next, server_activate, NULL, NULL);
     add_event_to_simulation(sim, event, 1);
   } else {
     state->status = 0;
@@ -86,7 +86,7 @@ void arrivalPayload(struct simulation *sim, void *metadata) {
 
     if(state->status == 0)
     {
-      event * event = createEvent(sim->clock, server_activate, NULL, NULL) ;
+      struct event * event = createEvent(sim->clock, server_activate, NULL, NULL) ;
       add_event_to_simulation(sim, event, 1);
     }
 }
@@ -99,15 +99,15 @@ void next_arrival(struct simulation *sim, void *metadata) {
 
     double time = sim->clock + inter;
 
-    event *event1 = createEvent(time, arrivalPayload, next_arrival, NULL) ;
+    struct event *event1 = createEvent(time, arrivalPayload, next_arrival, NULL) ;
 
     add_event_to_simulation(sim, event1, 0);
 }
 
 struct simulation *run_single_simulation(double lambda, double mu) {
     struct simulation_state* state = init_state(lambda, mu);
-    simulation *sim = create_simulation(sizeof(struct simulation_state), 2, 100000, (char *) state);
-    event *event = createEvent(0.0, arrivalPayload, next_arrival, NULL);
+    struct simulation *sim = create_simulation( 2, 100000, (char *) state);
+    struct event *event = createEvent(0.0, arrivalPayload, next_arrival, NULL);
     enqueue_event(sim->queues->queue, event);
     run_simulation(sim);
     destroy_state(state);

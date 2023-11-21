@@ -26,7 +26,7 @@ void destroy_simulation(struct simulation *sim) {
     free(sim) ;
 }
 
-event *getNextEvent(struct simulation *sim) {
+struct event *getNextEvent(struct simulation *sim) {
 
     struct event *chosen = NULL;
     int remove_index = -1 ;
@@ -66,7 +66,7 @@ event *getNextEvent(struct simulation *sim) {
 
 void run_simulation(struct simulation *sim) {
 
-    event *nextEv = getNextEvent(sim) ;
+    struct event *nextEv = getNextEvent(sim) ;
 
     while (nextEv != NULL) {
         consumeEvent(nextEv, sim) ;
@@ -74,19 +74,18 @@ void run_simulation(struct simulation *sim) {
     }
 }
 
-struct simulation *create_simulation(int state_size, int event_queues, double sim_end, const char *state) {
+struct simulation *create_simulation(int event_queues, double sim_end,  void *state) {
     struct simulation *sim ;
 
-    if((sim = malloc(sizeof(struct simulation) + state_size)) == NULL) {
+    if((sim = (struct simulation *) malloc(sizeof(struct simulation))) == NULL) {
         perror("Error in allocating memory for simulation: ") ;
         return sim ;
     }
-
-    memcpy(sim->state, state, state_size) ;
-
+    
     sim->queue_number = event_queues ;
     sim->clock = 0.0 ;
     sim->simEnd = sim_end ;
+    sim->state = state;
 
     struct queue_list *list_head ;
 
@@ -128,7 +127,7 @@ struct simulation *create_simulation(int state_size, int event_queues, double si
     return sim ;
 }
 
-void add_event_to_simulation(simulation *simulation, event *event, int queue_index)
+void add_event_to_simulation(struct simulation *simulation, struct event *event, int queue_index)
 {
     struct queue_list *queues = simulation->queues ;
 

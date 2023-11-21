@@ -3,8 +3,8 @@
 
 #include "event.h"
 
-event *createEvent(double time, void (*change_state_func)(simulation *sim, void *metadata),
-                   void (*schedule_func)(simulation *sim, void *metadata), void *metadata) {
+struct event *createEvent(double time, void (*change_state_func)(struct simulation *sim, void *metadata),
+                   void (*schedule_func)(struct simulation *sim, void *metadata), void *metadata) {
 
     struct event *retVal ;
 

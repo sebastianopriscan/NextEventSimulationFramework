@@ -55,13 +55,13 @@ void append_event(struct event_queue *queue, struct event *event) {
     }
 }
 
-event *dequeue_event(struct event_queue *queue) {
+struct event *dequeue_event(struct event_queue *queue) {
 
     struct event_node * first = queue->firstNode ;
     if (first == NULL) {
         return NULL ;
     } else {
-        event *retVal = first->payload_event ;
+        struct event *retVal = first->payload_event ;
 
         queue->firstNode = queue->firstNode->next_node ;
 

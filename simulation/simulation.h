@@ -9,19 +9,19 @@ struct queue_list {
     struct queue_list *next ;
 };
 
-typedef struct simulation {
+struct simulation {
 
     double clock ;
     double simEnd ;
     int queue_number ;
     struct queue_list *queues ;
 
-    char state[] ;
-} simulation ;
+    void *state;
+} ;
 
-simulation *create_simulation(int state_size, int event_queues, double sim_end, const char *state) ;
+struct simulation *create_simulation(int event_queues, double sim_end,  void *state) ;
 
-void add_event_to_simulation(simulation *simulation, struct event *event, int queue_index) ;
+void add_event_to_simulation(struct simulation *simulation, struct event *event, int queue_index) ;
 
 void destroy_simulation(struct simulation *sim) ;
 

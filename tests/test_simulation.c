@@ -2,22 +2,23 @@
 
 #include "simulation/simulation.h"
 
-void dummyStateModifier(simulation *sim, void *metadata) {
-    sim->state[0] = 'H' ;
-    sim->state[1] = 'e' ;
-    sim->state[2] = 'l' ;
-    sim->state[3] = 'l' ;
-    sim->state[4] = 'o' ;
-    sim->state[5] = '\0' ;
+void dummyStateModifier(struct simulation *sim, void *metadata) {
+    char *state = (char *)sim->state;
+    state[0] = 'H' ;
+    state[1] = 'e' ;
+    state[2] = 'l' ;
+    state[3] = 'l' ;
+    state[4] = 'o' ;
+    state[5] = '\0' ;
 
     printf("Executed event at time %f\n\n", sim->clock) ;
 }
 
-void dummyStateEvolver(simulation *sim, void * metadata) {
+void dummyStateEvolver(struct simulation *sim, void * metadata) {
     static int modulus = 0 ;
     static float time = 34.0f ;
     time = time +1 ;
-    event *event1 = createEvent(time,dummyStateModifier, dummyStateEvolver, NULL) ;
+    struct event *event1 = createEvent(time,dummyStateModifier, dummyStateEvolver, NULL) ;
 
     struct queue_list *queue = sim->queues ;
 
@@ -34,15 +35,15 @@ void dummyStateEvolver(simulation *sim, void * metadata) {
 int main(void) {
 
     char state[45] ;
-    simulation *simulation1 = create_simulation(3,3,45.0f, state) ;
+    struct simulation *simulation1 = create_simulation(3,45.0f, state) ;
 
-    event *event1 = createEvent(34.0f,dummyStateModifier, dummyStateEvolver, NULL) ;
+    struct event *event1 = createEvent(34.0f,dummyStateModifier, dummyStateEvolver, NULL) ;
 
     enqueue_event(simulation1->queues->queue, event1) ;
 
     run_simulation(simulation1) ;
 
-    printf("%s\n", simulation1->state) ;
+    printf("%s\n", (char *)simulation1->state) ;
 
     return 0 ;
 }
