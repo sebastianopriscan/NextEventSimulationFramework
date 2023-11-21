@@ -2,6 +2,10 @@
 #error You cannot include this header directly. Include "simulation/simulation.h" instead
 #endif
 
+#ifndef COMPILATION_H
+#error "You're not compiling the library
+#endif
+
 #ifndef EVENT_QUEUE_H
 #define EVENT_QUEUE_H
 #include "../events/event.h"

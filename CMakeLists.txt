@@ -11,6 +11,8 @@ add_library(
   event_queues/event_queue.c event_queues/event_queue.h
 )
 
+target_compile_definitions(NextEventSimulationFramework PRIVATE COMPILATION_H)
+
 target_include_directories (NextEventSimulationFramework PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_subdirectory(libs/RandomVariates)
