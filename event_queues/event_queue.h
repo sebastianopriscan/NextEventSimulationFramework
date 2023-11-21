@@ -3,7 +3,7 @@
 #endif
 
 #ifndef COMPILATION_H
-#error "You're not compiling the library
+#error "You're not compiling the library"
 #endif
 
 #ifndef EVENT_QUEUE_H
