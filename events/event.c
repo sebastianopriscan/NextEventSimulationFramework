@@ -1,10 +1,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "../simulation/simulation.h"
 #include "event.h"
 
-struct event *createEvent(double time, void (*change_state_func)(struct simulation *sim, void *metadata),
-                   void (*schedule_func)(struct simulation *sim, void *metadata), void *metadata) {
+struct event *createEvent(double time, simulation_function change_state_function,
+        simulation_function schedule_func, void *metadata) {
 
     struct event *retVal ;
 
@@ -14,7 +15,7 @@ struct event *createEvent(double time, void (*change_state_func)(struct simulati
     }
 
     retVal->time = time ;
-    retVal->change_sim_state = change_state_func ;
+    retVal->change_sim_state = change_state_function ;
     retVal->schedule_next_event = schedule_func ;
     retVal->metadata = metadata ;
 

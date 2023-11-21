@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "../simulation/simulation.h"
 #include "event_queue.h"
 
 struct event_node *create_node(struct event *event) {

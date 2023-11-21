@@ -3,6 +3,8 @@
 #include <string.h>
 
 #include "simulation.h"
+#include "../event_queues/event_queue.h"
+#include "../events/event.h"
 
 void destroy_simulation(struct simulation *sim) {
 

@@ -108,7 +108,7 @@ struct simulation *run_single_simulation(double lambda, double mu) {
     struct simulation_state* state = init_state(lambda, mu);
     struct simulation *sim = create_simulation( 2, 100000, (char *) state);
     struct event *event = createEvent(0.0, arrivalPayload, next_arrival, NULL);
-    enqueue_event(sim->queues->queue, event);
+    add_event_to_simulation(sim, event, 0);
     run_simulation(sim);
     destroy_state(state);
     return sim ;

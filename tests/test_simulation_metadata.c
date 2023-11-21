@@ -45,20 +45,13 @@ void dummyEvolverMetadata(struct simulation *sim, void *metadata) {
     int queue = ((int *)metadata)[0] ;
 
     struct event *event1 = createEvent(40.0f, dummyModifierMetadata, dummyStateEvolver, (void *)((int *)(metadata) +1)) ;
-
-    struct queue_list *list = sim->queues ;
-
-    for (int i = 1 ; i <= queue; i++) {
-        list = list->next ;
-    }
-
-    enqueue_event(list->queue,event1) ;
+    add_event_to_simulation(sim, event1, queue);
 }
 
 void dummyStateEvolver(struct simulation *sim, void * metadata) {
     struct event *event1 = createEvent(23.0f, NULL, NULL, NULL) ;
 
-    enqueue_event(sim->queues->next->queue, event1) ;
+    add_event_to_simulation(sim, event1, 1);
 
 }
 
@@ -81,7 +74,7 @@ int main(void) {
 
     struct event *event1 = createEvent(10.0f, dummyStateModifier, dummyEvolverMetadata, metadata);
 
-    enqueue_event(simulation1->queues->queue, event1) ;
+    add_event_to_simulation(simulation1, event1, 0) ;
 
     run_simulation(simulation1) ;
 

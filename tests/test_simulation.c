@@ -19,14 +19,8 @@ void dummyStateEvolver(struct simulation *sim, void * metadata) {
     static float time = 34.0f ;
     time = time +1 ;
     struct event *event1 = createEvent(time,dummyStateModifier, dummyStateEvolver, NULL) ;
+    add_event_to_simulation(sim, event1, modulus);
 
-    struct queue_list *queue = sim->queues ;
-
-    for(int i = 0; i < modulus ; i++) {
-        queue = queue->next ;
-    }
-
-    enqueue_event(queue->queue, event1) ;
     printf("Enqueued event at time %f in queue %d\n", time, modulus) ;
 
     modulus = (modulus+1)%3 ;
@@ -39,7 +33,7 @@ int main(void) {
 
     struct event *event1 = createEvent(34.0f,dummyStateModifier, dummyStateEvolver, NULL) ;
 
-    enqueue_event(simulation1->queues->queue, event1) ;
+    add_event_to_simulation(simulation1, event1, 0);
 
     run_simulation(simulation1) ;
 

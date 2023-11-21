@@ -1,6 +1,12 @@
-#pragma once
+#ifndef SIMULATION_H
+#error You cannot include this header directly. Include "simulation/simulation.h" instead
+#endif
 
+#ifndef EVENT_QUEUE_H
+#define EVENT_QUEUE_H
 #include "../events/event.h"
+
+struct event;
 
 struct event_node {
 
@@ -24,3 +30,4 @@ struct event *dequeue_event(struct event_queue *queue) ;
 struct event_queue *create_queue() ;
 
 void delete_queue(struct event_queue * queue) ;
+#endif

@@ -1,18 +1,21 @@
-#pragma once
+#ifndef SIMULATION_H
+#error You cannot include this header directly. Include "simulation/simulation.h" instead
+#endif
 
+#ifndef EVENT_H
+#define EVENT_H
 #include "../simulation/simulation.h"
 
 struct simulation ;
-
+typedef void (*simulation_function)(struct simulation *sim, void *metadata) ;
+ 
 struct event {
 
         double time ;
-        void (*change_sim_state)(struct simulation *sim, void *metadata) ;
-        void (*schedule_next_event)(struct simulation *sim, void *metadata) ;
+        simulation_function change_sim_state;
+        simulation_function schedule_next_event;
         void *metadata ;
 };
 
-struct event *createEvent(double time, void (*change_state_func)(struct simulation *sim, void *metadata),
-        void (*schedule_func)(struct simulation *sim, void *metadata), void *metadata) ;
-
 void consumeEvent(struct event *ev, struct simulation *sim) ;
+#endif
