@@ -16,5 +16,7 @@ void destroy_generic_queue_list(struct generic_queue_list *);
 
 void *generic_dequeue_element(struct generic_queue_list *list) ;
 int generic_enqueue_element(struct generic_queue_list *list, void *data) ;
+// Data free must be handled by the caller
+void generic_remove_element(struct generic_queue_list *list, void *data);
 
 #endif

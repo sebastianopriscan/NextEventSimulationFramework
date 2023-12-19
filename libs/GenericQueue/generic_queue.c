@@ -59,3 +59,27 @@ int generic_enqueue_element(struct generic_queue_list *list, void *data) {
 
     return 0;
 }
+
+void generic_remove_element(struct generic_queue_list *list, void *data) {
+  if (list->head == NULL) return;
+
+  struct generic_queue_node *prev_cursor = NULL;
+  struct generic_queue_node *cursor = list->head;
+  while(cursor != NULL && cursor->data != data) {
+    prev_cursor = cursor;
+    cursor = cursor->next;
+  }
+  if (cursor == NULL) return;
+
+  if (prev_cursor != NULL) {
+    prev_cursor->next = cursor->next;
+  } else {
+    queue->head = cursor->next;
+  }
+
+  if (cursor->next == NULL) {
+    queue->tail = prev_cursor;
+    prev_cursor->next = NULL;
+  }
+  free(cursor);
+}

@@ -103,10 +103,11 @@ void delete_event(struct event_queue *queue, struct event *event)  {
         return;
     }
     struct event_node *cursor = queue->firstNode;
-    while(cursor->payload_event != event) {
+    while(cursor != NULL && cursor->payload_event != event) {
         if(cursor == NULL) return ;
         cursor = cursor->next_node ;
     }
+    if (cursor == NULL) return;
 
     if(cursor->prev_node != NULL) {
         cursor->prev_node->next_node = cursor->next_node;    
