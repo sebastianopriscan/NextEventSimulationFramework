@@ -21,3 +21,8 @@ add_executable(TestSimMM1 test_simulation_mm1.c)
 target_link_libraries(TestSimMM1 NextEventSimulationFramework RandomVariates m)
 add_test(NAME TestSimMM1
         COMMAND TestSimMM1)
+
+add_executable(TestEventRemoval test_event_removal.c)
+target_link_libraries(TestEventRemoval NextEventSimulationFramework RandomVariates m)
+add_test(NAME TestEventRemoval 
+        COMMAND TestEventRemoval)

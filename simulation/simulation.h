@@ -32,4 +32,7 @@ void run_simulation(struct simulation *sim) ;
 struct event *createEvent(double time, simulation_function change_state_function,
         simulation_function schedule_func, void *metadata) ;
 
+// Deletes an event from the simulation (it frees the event). Metadata must be handled by the caller
+void delete_event_from_simulation(struct simulation* sim, int queue_index, struct event *event);
+
 #endif

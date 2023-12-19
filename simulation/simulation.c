@@ -131,6 +131,7 @@ struct simulation *create_simulation(int event_queues, double sim_end,  void *st
 
 void add_event_to_simulation(struct simulation *simulation, struct event *event, int queue_index)
 {
+    if(queue_index >= simulation->queue_number) return;
     struct queue_list *queues = simulation->queues ;
 
     for (int i = 0; i < queue_index; i++)
@@ -139,4 +140,16 @@ void add_event_to_simulation(struct simulation *simulation, struct event *event,
     }
 
     enqueue_event(queues->queue, event) ;
+}
+
+void delete_event_from_simulation(struct simulation* sim, int queue_index, struct event *event) {
+    struct queue_list *queues = sim->queues ;
+
+    if(queue_index >= sim->queue_number) return ;
+    for (int i = 0; i < queue_index; i++)
+    {
+        queues = queues->next ;
+    }
+    delete_event(queues->queue, event);
+    free(event);
 }

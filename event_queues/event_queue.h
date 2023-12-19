@@ -31,6 +31,8 @@ void append_event(struct event_queue *queue, struct event *event) ;
 
 struct event *dequeue_event(struct event_queue *queue) ;
 
+void delete_event(struct event_queue *queue, struct event *event) ;
+
 struct event_queue *create_queue() ;
 
 void delete_queue(struct event_queue * queue) ;

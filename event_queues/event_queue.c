@@ -97,3 +97,27 @@ void delete_queue(struct event_queue * queue) {
 
     free(queue) ;
 }
+
+void delete_event(struct event_queue *queue, struct event *event)  {
+    if (queue->firstNode == NULL) {
+        return;
+    }
+    struct event_node *cursor = queue->firstNode;
+    while(cursor->payload_event != event) {
+        if(cursor == NULL) return ;
+        cursor = cursor->next_node ;
+    }
+
+    if(cursor->prev_node != NULL) {
+        cursor->prev_node->next_node = cursor->next_node;    
+    } else {
+        queue->firstNode = cursor->next_node;
+    }
+    
+    if (cursor->next_node != NULL) {
+        cursor->next_node->prev_node = cursor->prev_node;
+    } else {
+        queue->lastNode = cursor->prev_node;
+    }
+    destroy_node(cursor);
+}
