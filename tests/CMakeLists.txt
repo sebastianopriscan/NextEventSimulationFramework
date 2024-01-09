@@ -26,3 +26,8 @@ add_executable(TestEventRemoval test_event_removal.c)
 target_link_libraries(TestEventRemoval NextEventSimulationFramework RandomVariates m)
 add_test(NAME TestEventRemoval 
         COMMAND TestEventRemoval)
+
+add_executable(TestMultipleInsertions test_multiple_insertions.c)
+target_link_libraries(TestMultipleInsertions NextEventSimulationFramework RandomVariates m)
+add_test(NAME TestMultipleInsertions
+        COMMAND TestMultipleInsertions)
