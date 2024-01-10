@@ -44,15 +44,16 @@ void enqueue_event(struct event_queue *queue, struct event *event) {
         do {
             prev = node ;
             node = node->next_node ;
-        } while (node != NULL && prev->payload_event->time > event->time) ;
+        } while (node != NULL && (event->time > node->payload_event->time || event->time < prev->payload_event->time)) ;
 
         prev->next_node = create_node(event) ;
         prev->next_node->next_node = node ;
         if(node != NULL) {
-            prev->next_node->prev_node = node->prev_node ;
+            prev->next_node->prev_node = prev ;
             node->prev_node = prev->next_node ;
         } else {
             queue->lastNode = prev->next_node ;
+            prev->next_node->prev_node = prev;
         }
     }
 }

@@ -28,6 +28,7 @@ add_test(NAME TestEventRemoval
         COMMAND TestEventRemoval)
 
 add_executable(TestMultipleInsertions test_multiple_insertions.c)
+target_compile_definitions(TestMultipleInsertions PRIVATE COMPILATION_H)
 target_link_libraries(TestMultipleInsertions NextEventSimulationFramework RandomVariates m)
 add_test(NAME TestMultipleInsertions
         COMMAND TestMultipleInsertions)
