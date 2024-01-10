@@ -79,7 +79,8 @@ void generic_remove_element(struct generic_queue_list *list, void *data) {
 
   if (cursor->next == NULL) {
     list->tail = prev_cursor;
-    prev_cursor->next = NULL;
+    if(prev_cursor != NULL)
+      prev_cursor->next = NULL;
   }
   free(cursor);
 }
