@@ -9,7 +9,7 @@ struct generic_queue_list *create_queue_list() {
     perror("Unable to allocate generic_queue_list");
     return NULL;
   }
-
+  queue->size = 0 ;
   queue->head = queue->tail = NULL ;
   return queue;
 }
@@ -27,6 +27,7 @@ void *generic_dequeue_element(struct generic_queue_list *list) {
   if (head == NULL)
     return NULL;
   
+  list->size-- ;
   void *data = head->data;
   list->head = list->head->next;  
 
@@ -45,6 +46,8 @@ int generic_enqueue_element(struct generic_queue_list *list, void *data) {
         perror("Unable to allocate queue") ;
         return -1 ;
     }
+
+    list->size++ ;
 
     node->next = NULL;
     node->data = data ;
@@ -70,6 +73,8 @@ void generic_remove_element(struct generic_queue_list *list, void *data) {
     cursor = cursor->next;
   }
   if (cursor == NULL) return;
+
+  list->size-- ;
 
   if (prev_cursor != NULL) {
     prev_cursor->next = cursor->next;

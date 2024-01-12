@@ -9,6 +9,7 @@ struct generic_queue_node {
 struct generic_queue_list {
   struct generic_queue_node *head;
   struct generic_queue_node *tail;
+  unsigned int size ;
 };
 
 struct generic_queue_list *create_queue_list() ;
