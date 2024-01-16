@@ -3,6 +3,6 @@ project(RandomVariates C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_library(RandomVariates STATIC rngs.c rngs.h rvgs.c rvgs.h)
+add_library(RandomVariates STATIC rngs.c rngs.h rvgs.c rvgs.h rvms.h rvms.c)
 
 target_include_directories (RandomVariates PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
