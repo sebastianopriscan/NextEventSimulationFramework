@@ -88,6 +88,7 @@ struct simulation *create_simulation(int event_queues, double sim_end,  void *st
     sim->clock = 0.0 ;
     sim->simEnd = sim_end ;
     sim->state = state;
+    sim->until_end = 0;
 
     struct queue_list *list_head ;
 
@@ -129,9 +130,19 @@ struct simulation *create_simulation(int event_queues, double sim_end,  void *st
     return sim ;
 }
 
-void add_event_to_simulation(struct simulation *simulation, struct event *event, int queue_index)
+struct simulation *create_simulation_until_end(int event_queues, double sim_end,  void *state) {
+    struct simulation* sim = create_simulation(event_queues, sim_end, state);
+    if (sim == NULL)
+        return NULL;
+    
+    sim->until_end = 1;
+    return sim;
+}
+
+int add_event_to_simulation(struct simulation *simulation, struct event *event, int queue_index)
 {
-    if(queue_index >= simulation->queue_number) return;
+    if (simulation->until_end && event->discardable) return 1;
+    if(queue_index >= simulation->queue_number) return 0;
     struct queue_list *queues = simulation->queues ;
 
     for (int i = 0; i < queue_index; i++)
@@ -140,6 +151,7 @@ void add_event_to_simulation(struct simulation *simulation, struct event *event,
     }
 
     enqueue_event(queues->queue, event) ;
+    return 0;
 }
 
 void delete_event_from_simulation(struct simulation* sim, int queue_index, struct event *event) {

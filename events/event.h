@@ -18,6 +18,7 @@ struct event {
         double time ;
         simulation_function change_sim_state;
         simulation_function schedule_next_event;
+        char discardable;
         void *metadata ;
 };
 
