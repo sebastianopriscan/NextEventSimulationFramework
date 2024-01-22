@@ -141,7 +141,7 @@ struct simulation *create_simulation_until_end(int event_queues, double sim_end,
 
 int add_event_to_simulation(struct simulation *simulation, struct event *event, int queue_index)
 {
-    if (simulation->until_end && event->discardable) return 1;
+    if (simulation->clock >= simulation->simEnd && simulation->until_end && event->discardable) return 1;
     if(queue_index >= simulation->queue_number) return 0;
     struct queue_list *queues = simulation->queues ;
 
