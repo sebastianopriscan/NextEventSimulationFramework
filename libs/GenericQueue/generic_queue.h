@@ -20,4 +20,12 @@ int generic_enqueue_element(struct generic_queue_list *list, void *data) ;
 // Data free must be handled by the caller
 void generic_remove_element(struct generic_queue_list *list, void *data);
 
+/**
+ * comparator must return :
+ *  0 if equal
+ *  1 if first < second
+ * -1 otherwise 
+*/
+int generic_insert_element(struct generic_queue_list *list, void *data, int comparator(void *first, void *second));
+
 #endif
